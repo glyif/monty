@@ -11,10 +11,17 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
+
+typedef struct chanco_s
+{
+	char *argument;
+	char *current_line;
+	stack_t **stack;
+} chanco_t;
 
 /**
  * struct instruction_s - opcoode and its function
@@ -26,7 +33,7 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, chanco_t *vars, unsigned int line_number);
 } instruction_t;
 #endif

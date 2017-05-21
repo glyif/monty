@@ -1,17 +1,10 @@
 #include "monty.h"
 
-int main(void)
+int main(int argc,char **argv)
 {
-	int fd;
-	char *buffer;
+	stack_t *stack;
 
-	buffer = malloc(1024);
-	fd = open("/home/vagrant/monty/test", O_RDONLY);
-
-	while (_readline(fd, &buffer) > 0)
-	{
-		printf("%s", buffer);
-	}
-
+	stack=NULL;
+	parse_monty(argv[1],&stack);
 	return (0);
 }
