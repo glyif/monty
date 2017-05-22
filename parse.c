@@ -66,7 +66,10 @@ void parse_line()
 		{"push",push},
 		{"pall",pall},
 		{"pint",pint},
-		{"pop",pop}
+		{"pop",pop},
+		{"swap",swap},
+		{"add",add},
+		{"nop",nop}
 	};
 
 	n = sizeof(instructions) / sizeof(instruction_t);

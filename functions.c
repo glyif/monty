@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void push(stack_t **stack,unsigned int line_number) 
+void push(stack_t **stack, unsigned int line_number) 
 {
 	stack_t *s;
 
@@ -26,7 +26,7 @@ void push(stack_t **stack,unsigned int line_number)
 	*stack = s;
 }
 
-void pall(stack_t **stack,unsigned int line_number) 
+void pall(stack_t **stack, unsigned int line_number) 
 {
 	stack_t *s;
 
@@ -40,7 +40,7 @@ void pall(stack_t **stack,unsigned int line_number)
 	}
 }
 
-void pint(stack_t **stack,unsigned int line_number) 
+void pint(stack_t **stack, unsigned int line_number) 
 {
 	if(*stack == NULL)
 	{
@@ -51,7 +51,7 @@ void pint(stack_t **stack,unsigned int line_number)
 	puts("");
 }
 
-void pop(stack_t **stack,unsigned int line_number) 
+void pop(stack_t **stack, unsigned int line_number) 
 {
 	stack_t *s;
 
@@ -66,4 +66,36 @@ void pop(stack_t **stack,unsigned int line_number)
 
 	free(*stack);
 	*stack = s;
+}
+
+void swap(stack_t **stack, unsigned int line_number) 
+{
+	int n;
+
+	if (*stack == NULL || (*stack)->prev == NULL)
+	{
+		opcode_error("can't swap, ","stack too short",line_number);  
+		return;
+	}
+	
+	n = (*stack)->n;
+	(*stack)->n = (*stack)->prev->n;
+	(*stack)->prev->n = n;
+}
+
+void add(stack_t **stack, unsigned int line_number) 
+{
+	if (*stack == NULL || (*stack)->prev == NULL)
+	{
+		opcode_error("can't add, ","stack too short",line_number);  
+		return;
+	}
+	(*stack)->prev->n += (*stack)->n;
+	pop(stack,line_number);
+}
+
+void nop(stack_t **stack, unsigned int line_number) 
+{
+	(void)stack;
+	(void)line_number;
 }
