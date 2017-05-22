@@ -89,7 +89,6 @@ void parse_monty()
 {
 	char *p;
 	int fd; 
-	int interactive;
 	int len;
 
 	if ((fd = open(global_arginv->argument,O_RDONLY))==-1)

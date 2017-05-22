@@ -10,6 +10,7 @@
 #include "base_structs.h"
 #define BUFSIZE 1024
 ssize_t _readline(int fd, char **buffer);
+int freeall();
 
 char *parse_tok(char *str);
 void parse_monty();

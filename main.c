@@ -1,10 +1,5 @@
 #include "monty.h"
 
-/**
- * popall - removes all the elements in the stack, freeing all allocated memory
- *
- * @stack: stack used by the interpreter
- */
 void popall(stack_t **stack) 
 {
 	stack_t *t;
@@ -42,6 +37,11 @@ void buildarginv(void)
 
 int main(int argc,char **argv)
 {
+	if (argc != 2)
+	{
+		printf("USAGE: monty file");
+		exit(EXIT_FAILURE);
+	}
 	buildarginv();
 	global_arginv->argument = argv[1];
 	parse_monty();
