@@ -18,88 +18,87 @@ char _isspace(char c)
 	return (i);
 }
 
-/**
- * parse_tok - tokenizes a command
- * @str: line to tokenize
- * 
- * Return: pointer to the second part of the token
-*/
-char *parse_tok(char *str)
+char *parse_token(char *str)
 {
 	char *p;
-
+	
 	p = str;
-
-	while (*p && _isspace(*p))
+	while (*p && !_isspace(*p))
 		p++;
 
-	if(!*p)
-		return (p);
+	if (!*p)
+		return p;
 
-	while (*p && _isspace(*p))
+	*(p++)='\0';
+
+	while(*p && _isspace(*p))
 		p++;
 
 	return (p);
 }
 
-void parse_monty(char *filename, stack_t **stack)
+void parse_line()
 {
-	int fd;
-	char *buffer, *p;
-	int line_number;
-	int len;
-	chanco_t args;
-	
-	line_number = 1;
-	buffer = malloc(1024);
-
-	fd = open(filename, O_RDONLY);
-	len = 0;
-	while((len = _readline(fd, &buffer)) != 0)
+	char *line;
+	int inst,n;
+	instruction_t instructions[] =
 	{
-		while (len && buffer[len - 1] == '\n')
-			buffer[--len] = '\0';
-
-		p = buffer;
-
-		while (*p == ' ' || *p == '\t')
-			p++;
-
-		if (p[0] != '\0')
-		{
-			args.stack = stack;
-			args.current_line = buffer;
-			args.argument = NULL;
-			parse_line(p, stack, line_number, &args);
-		}
-
-		line_number++;
-		memset(buffer, '\0', 1024);
-	}
-	free(buffer);
-	close(fd);
-}
-
-void parse_line(char *buffer, stack_t **stack, int line_number, chanco_t *args)
-{
-	int inst;
-
-	instruction_t instructions[] = {
-		{"print_hi", print_hi},
-		{NULL, NULL}
+		{"print_hi", print_hi}
 	};
 
-	args->argument = parse_tok(buffer);
+	n = sizeof(instructions) / sizeof(instruction_t);
+	line = global_arginv->argument;
+	global_arginv->argument = parse_token(line);
 	inst = -1;
 
-	while(instructions[inst].f != NULL)
+	while ((++inst) < n)
 	{
-		if (!strcmp(buffer, instructions[inst].opcode))
+		if (!strcmp(line,instructions[inst].opcode))
 		{
-			parse_tok(args->argument);
-			instructions[inst].f(stack, args, line_number);
+			parse_token(global_arginv->argument); /* to insert end of string at the end of next token */
+			instructions[inst].f(&global_arginv->stack,global_arginv->line_number);						
 			return;
 		}
-		inst++;
+	}  
+}
+
+void parse_monty() 
+{
+	char *p;
+	int fd; 
+	int interactive;
+	int len;
+
+	if ((fd = open(global_arginv->argument,O_RDONLY))==-1)
+	{
+		perror("Error: Can't open file ");
+		perror(global_arginv->argument);
+		perror("\n");
+		freeall();
+		exit(EXIT_FAILURE);
 	}
+	global_arginv->line_number = 1;
+
+	while(global_arginv->exit != EXIT_FAILURE
+		  && (len=_readline(fd,&global_arginv->input_commands))!=0)
+	{
+		if (len) 
+		{
+			while(len && global_arginv->input_commands[len - 1] == '\n')
+			    global_arginv->input_commands[len--] = '\0';
+
+			p = global_arginv->input_commands;
+
+			while(*p==' ' || *p=='\t')
+				p++;
+			if(p[0]!=0) 
+			{
+				global_arginv->argument=p;
+				parse_line();
+			}
+		}
+		global_arginv->line_number++;
+		memset(global_arginv->input_commands, '\0', global_arginv->buflimit);
+  	}
+	close(fd);
 }

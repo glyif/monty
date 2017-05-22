@@ -34,6 +34,19 @@ typedef struct chanco_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, chanco_t *vars, unsigned int line_number);
+	void (*f)(stack_t **stack,unsigned int line_number);
 } instruction_t;
+
+typedef struct arg_inventory
+{
+	char   *input_commands;
+	char   *argument;
+	size_t buflimit;
+	int	   line_number;
+	stack_t *stack;
+	
+	int exit;
+} arg_inventory_t;
+
+arg_inventory_t *global_arginv;	/* global argument inventory */
 #endif

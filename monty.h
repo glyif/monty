@@ -6,13 +6,15 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "base_structs.h"
+#define BUFSIZE 1024
 ssize_t _readline(int fd, char **buffer);
 
 char *parse_tok(char *str);
-void parse_monty(char *filename, stack_t **stack);
-void parse_line(char *buffer, stack_t **stack, int line_number, chanco_t *vars);
+void parse_file();
+void parse_line();
 
-void print_hi(stack_t **stack, chanco_t *args, unsigned int line_number);
+void print_hi(stack_t **stack, unsigned int line_number);
 
 #endif
