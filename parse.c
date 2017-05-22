@@ -18,6 +18,26 @@ char _isspace(char c)
 	return (i);
 }
 
+int parse_int(char *str)
+{
+	char *p;
+	
+	p = str;
+	if (*p == '-' || *p == '+')	/*skip sign*/
+		p++;
+
+	if (!*p)
+		return 0;
+
+	while (*p)
+	{
+		if(*p < '0' || *p > '9')	/* if it's not a digit, fail*/
+			return 0;
+		p++;
+	}
+	return (1);	/* if we reach this point the number is valid */
+}
+
 char *parse_token(char *str)
 {
 	char *p;
@@ -43,7 +63,10 @@ void parse_line()
 	int inst,n;
 	instruction_t instructions[] =
 	{
-		{"print_hi", print_hi}
+		{"push",push},
+		{"pall",pall},
+		{"pint",pint},
+		{"pop",pop}
 	};
 
 	n = sizeof(instructions) / sizeof(instruction_t);
