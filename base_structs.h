@@ -15,14 +15,6 @@ typedef struct stack_s
 	struct stack_s *prev;
 	struct stack_s *next;
 } stack_t;
-
-typedef struct chanco_s
-{
-	char *argument;
-	char *current_line;
-	stack_t **stack;
-} chanco_t;
-
 /**
  * struct instruction_s - opcoode and its function
  * @opcode: the opcode
@@ -34,21 +26,27 @@ typedef struct chanco_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack,unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
+/**
+ * struct arg_inventory - input arguments struct
+ * @input_commands: input command
+ * @argument: input number
+ * @buflimit: buffer limit
+ * @line_number: line number
+ * @stack: stack struct
+ * @mode: 0 for stack, 1 for queue
+ * @exit: exit status, failure or success
+ */
 typedef struct arg_inventory
 {
-	char   *input_commands;
-	char   *argument;
+	char *input_commands;
+	char *argument;
 	size_t buflimit;
-	int	   line_number;
+	int line_number;
 	stack_t *stack;
-
-	int mode; /* 0 for stack, 1 for queue */
-
+	int mode;
 	int exit;
 } arg_inventory_t;
 
-arg_inventory_t *global_arginv;	/* global argument inventory */
 #endif

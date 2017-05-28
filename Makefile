@@ -7,7 +7,8 @@ CFILES=\
 	parse.c\
 	readline.c\
 	helper.c\
-	functions.c\
+	functions1.c\
+	functions2.c\
 	math_funcs.c\
 	rotate.c\
 	string_funcs.c

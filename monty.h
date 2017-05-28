@@ -22,7 +22,7 @@ int parse_int(char *str);
 int _atoi(char *s);
 int write_uint(unsigned int n);
 void opcode_error(char *msg1, char *msg2, int line_number);
-
+arg_inventory_t *global_arginv;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
