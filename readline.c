@@ -29,5 +29,5 @@ ssize_t _readline(int fd, char **buffer)
 			break;
 	}
 
-		return(count);
+	return (count);
 }

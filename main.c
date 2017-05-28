@@ -1,5 +1,9 @@
 #include "monty.h"
 
+/**
+ * popall - frees all in stack
+ * @stack: pointer to stack
+ */
 void popall(stack_t **stack)
 {
 	stack_t *s, *t;
@@ -14,12 +18,16 @@ void popall(stack_t **stack)
 	free(s);
 }
 
-int freeall()
+/**
+ * freeall - frees all before exit
+ * Return: exit status
+ */
+int freeall(void)
 {
 	int exit_code;
 
 	exit_code = global_arginv->exit;
-	if (global_arginv->stack!=NULL)
+	if (global_arginv->stack != NULL)
 		popall(&global_arginv->stack);
 	free(global_arginv->input_commands);
 	free(global_arginv);
@@ -27,7 +35,9 @@ int freeall()
 	return (exit_code);
 }
 
-
+/**
+ * buildarginv - initilalizes the global_arginv struct
+ */
 void buildarginv(void)
 {
 	global_arginv = malloc(sizeof(arg_inventory_t));
@@ -38,7 +48,14 @@ void buildarginv(void)
 	global_arginv->mode = 0;
 }
 
-int main(int argc,char **argv)
+/**
+ * main - entry point
+ * @argc: argument count
+ * @argv: arguments
+ *
+ * Return: exit status
+ */
+int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{

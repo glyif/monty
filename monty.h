@@ -12,11 +12,11 @@
 #define STACK 0
 #define QUEUE 1
 ssize_t _readline(int fd, char **buffer);
-int freeall();
+int freeall(void);
 
 char *parse_tok(char *str);
-void parse_monty();
-void parse_line();
+void parse_monty(void);
+void parse_line(void);
 int parse_int(char *str);
 
 int _atoi(char *s);
