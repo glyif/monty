@@ -40,7 +40,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
-void pint(stack_t **stack, unsigned int line_number) 
+void pint(stack_t **stack, unsigned int line_number)
 {
 	if(*stack == NULL)
 	{
@@ -51,13 +51,13 @@ void pint(stack_t **stack, unsigned int line_number)
 	puts("");
 }
 
-void pop(stack_t **stack, unsigned int line_number) 
+void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *s;
 
 	if (*stack == NULL)
 	{
-		opcode_error("can't pop an empty stack",NULL,line_number);  
+		opcode_error("can't pop an empty stack",NULL,line_number);
 		return;
 	}
 	s = (*stack)->prev;
@@ -68,33 +68,33 @@ void pop(stack_t **stack, unsigned int line_number)
 	*stack = s;
 }
 
-void swap(stack_t **stack, unsigned int line_number) 
+void swap(stack_t **stack, unsigned int line_number)
 {
 	int n;
 
 	if (*stack == NULL || (*stack)->prev == NULL)
 	{
-		opcode_error("can't swap, ","stack too short",line_number);  
+		opcode_error("can't swap, ","stack too short",line_number);
 		return;
 	}
-	
+
 	n = (*stack)->n;
 	(*stack)->n = (*stack)->prev->n;
 	(*stack)->prev->n = n;
 }
 
-void add(stack_t **stack, unsigned int line_number) 
+void add(stack_t **stack, unsigned int line_number)
 {
 	if (*stack == NULL || (*stack)->prev == NULL)
 	{
-		opcode_error("can't add, ","stack too short",line_number);  
+		opcode_error("can't add, ","stack too short",line_number);
 		return;
 	}
 	(*stack)->prev->n += (*stack)->n;
 	pop(stack,line_number);
 }
 
-void nop(stack_t **stack, unsigned int line_number) 
+void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;

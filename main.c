@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void popall(stack_t **stack) 
+void popall(stack_t **stack)
 {
 	stack_t *t;
 
@@ -15,7 +15,7 @@ void popall(stack_t **stack)
 int freeall()
 {
 	int exit_code;
-	
+
 	exit_code = global_arginv->exit;
 	if (global_arginv->stack!=NULL)
 		popall(&global_arginv->stack);

@@ -21,7 +21,7 @@ char _isspace(char c)
 int parse_int(char *str)
 {
 	char *p;
-	
+
 	p = str;
 	if (*p == '-' || *p == '+')	/*skip sign*/
 		p++;
@@ -41,7 +41,7 @@ int parse_int(char *str)
 char *parse_token(char *str)
 {
 	char *p;
-	
+
 	p = str;
 	while (*p && !_isspace(*p))
 		p++;
@@ -82,17 +82,17 @@ void parse_line()
 		if (!strcmp(line,instructions[inst].opcode))
 		{
 			parse_token(global_arginv->argument); /* to insert end of string at the end of next token */
-			instructions[inst].f(&global_arginv->stack,global_arginv->line_number);						
+			instructions[inst].f(&global_arginv->stack,global_arginv->line_number);
 			return;
 		}
 	}  
 	opcode_error("unknown instruction ", line, global_arginv->line_number);
 }
 
-void parse_monty() 
+void parse_monty()
 {
 	char *p;
-	int fd; 
+	int fd;
 	int len;
 
 	if ((fd = open(global_arginv->argument,O_RDONLY))==-1)
@@ -108,7 +108,7 @@ void parse_monty()
 	while(global_arginv->exit != EXIT_FAILURE
 		  && (len=_readline(fd,&global_arginv->input_commands))!=0)
 	{
-		if (len) 
+		if (len)
 		{
 			while(len && global_arginv->input_commands[len - 1] == '\n')
 			    global_arginv->input_commands[len--] = '\0';
@@ -117,7 +117,7 @@ void parse_monty()
 
 			while(*p==' ' || *p=='\t')
 				p++;
-			if(p[0]!=0) 
+			if(p[0]!=0)
 			{
 				global_arginv->argument=p;
 				parse_line();

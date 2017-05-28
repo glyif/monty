@@ -44,7 +44,7 @@ typedef struct arg_inventory
 	size_t buflimit;
 	int	   line_number;
 	stack_t *stack;
-	
+
 	int exit;
 } arg_inventory_t;
 
