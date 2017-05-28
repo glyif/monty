@@ -3,7 +3,7 @@
 
 void sub(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
 		opcode_error("can't sub, ","stack too short", line_number);
 		return;
@@ -15,7 +15,7 @@ void sub(stack_t **stack, unsigned int line_number)
 
 void divide(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
 		opcode_error("can't div, ","stack too short", line_number);
 		return;
@@ -31,7 +31,7 @@ void divide(stack_t **stack, unsigned int line_number)
 
 void mul(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
 		opcode_error("can't mul, ","stack too short", line_number);
 		return;
@@ -42,7 +42,7 @@ void mul(stack_t **stack, unsigned int line_number)
 
 void mod(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
 		opcode_error("can't mod, ","stack too short", line_number);
 		return;
