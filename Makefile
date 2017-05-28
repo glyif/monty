@@ -8,7 +8,8 @@ CFILES=\
 	readline.c\
 	helper.c\
 	functions.c\
-	sub.c
+	sub.c\
+	rotate.c
 
 GLOBAL_HEADERS=\
 	monty.h

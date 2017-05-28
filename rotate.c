@@ -1,4 +1,4 @@
-#include "base_stucts.h"
+#include "monty.h"
 
 void rotl(stack_t **stack, unsigned int line_number)
 {
@@ -17,5 +17,5 @@ void rotr(stack_t **stack, unsigned int line_number)
 	if (*stack == NULL)
 		return;
 
-	*stack = (*stack)-next;
+	*stack = (*stack)->next;
 }
