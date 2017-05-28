@@ -1,15 +1,11 @@
 #include "monty.h"
 
-void _puts(char *str)
-{
-	int i;
-
-	for (i = 0; str[i] != '\0'; i++)
-		;
-
-	write(1, str, i);
-}
-
+/**
+ * _atoi: string to int
+ * @s: string to convert
+ *
+ * Return: integer converted from string
+ */
 int _atoi(char *s)
 {
 	int result = 0, sign = 0, c;
@@ -28,6 +24,12 @@ int _atoi(char *s)
 	return (result *= sign % 2 == 0 ? -1 : 1);
 }
 
+/**
+ * write_uint - prints unsigned int
+ * @n: integer to print
+ *
+ * Return: number of chars written
+ */
 int write_uint(unsigned int n)
 {
 	unsigned int copy, size;
@@ -53,13 +55,19 @@ int write_uint(unsigned int n)
 	return (chars_written);
 }
 
-void opcode_error(char *msg1,char *msg2,int line_number)
+/**
+ * opcode_error - prints error for a line monty
+ * @msg1: unknown instrtuction
+ * @msg2: actual instruction string
+ * @line_number: line number the error happened
+ */
+void opcode_error(char *msg1, char *msg2, int line_number)
 {
 	printf("L");
 	write_uint(line_number);
 	printf(": ");
 	printf("%s", msg1);
-	if(msg2)
+	if (msg2)
 		printf("%s", msg2);
 	printf("\n");
 	global_arginv->exit = EXIT_FAILURE;
