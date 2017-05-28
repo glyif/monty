@@ -107,9 +107,7 @@ void parse_monty()
 
 	if ((fd = open(global_arginv->argument,O_RDONLY))==-1)
 	{
-		perror("Error: Can't open file ");
-		perror(global_arginv->argument);
-		perror("\n");
+		printf("Error: Can't open file %s \n",global_arginv->argument);
 		freeall();
 		exit(EXIT_FAILURE);
 	}
@@ -121,13 +119,13 @@ void parse_monty()
 		if (len)
 		{
 			while(len && global_arginv->input_commands[len - 1] == '\n')
-			    global_arginv->input_commands[len--] = '\0';
+			    global_arginv->input_commands[--len] = '\0';
 
 			p = global_arginv->input_commands;
 
 			while(*p==' ' || *p=='\t')
 				p++;
-			if(p[0]!=0)
+			if (p[0] != 0 && p[0] != '#') /* ignore commented lines */
 			{
 				global_arginv->argument=p;
 				parse_line();
