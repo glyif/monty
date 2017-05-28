@@ -9,7 +9,8 @@ CFILES=\
 	helper.c\
 	functions.c\
 	math_funcs.c\
-	rotate.c
+	rotate.c\
+	string_funcs.c
 
 GLOBAL_HEADERS=\
 	monty.h

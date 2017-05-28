@@ -77,7 +77,9 @@ void parse_line()
 		{"stack",stack},
 		{"queue",queue},
 		{"rotl", rotl},
-		{"rotr", rotr}
+		{"rotr", rotr},
+		{"pchar", pchar},
+		{"pstr", pstr}
 	};
 
 	n = sizeof(instructions) / sizeof(instruction_t);
