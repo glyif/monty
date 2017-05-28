@@ -7,7 +7,8 @@ CFILES=\
 	parse.c\
 	readline.c\
 	helper.c\
-	functions.c
+	functions.c\
+	sub.c
 
 GLOBAL_HEADERS=\
 	monty.h
