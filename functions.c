@@ -37,7 +37,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 }
 
-void pall(stack_t **stack, unsigned int line_number) 
+void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *s;
 
@@ -53,6 +53,8 @@ void pall(stack_t **stack, unsigned int line_number)
 		puts("");
 		s = s->prev;
 	}
+	write_uint(s->n);
+	puts("");
 }
 
 void pint(stack_t **stack, unsigned int line_number)
