@@ -70,6 +70,9 @@ void parse_line()
 		{"swap",swap},
 		{"add",add},
 		{"sub",sub},
+		{"div", divide},
+		{"mul", mul},
+		{"mod", mod},
 		{"nop",nop},
 		{"stack",stack},
 		{"queue",queue}
