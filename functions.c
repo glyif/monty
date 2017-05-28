@@ -16,14 +16,25 @@ void push(stack_t **stack, unsigned int line_number)
 		freeall();
 		exit(EXIT_FAILURE);
 	}
-	s->prev = *stack;
-	s->next = NULL;
 	s->n = _atoi(global_arginv->argument);
 
-	if(*stack!=NULL)
+	if (*stack != NULL)
+	{
+		s->next = (*stack)->next;
+		(*stack)->next->prev = s;
+		s->prev = *stack;
 		(*stack)->next = s;
+	}
+	else
+	{
+		s->next = s;
+		s->prev = s;
+		*stack = s;
+	}
 
-	*stack = s;
+	if (global_arginv->mode == STACK)
+		*stack = s;
+
 }
 
 void pall(stack_t **stack, unsigned int line_number) 
@@ -32,7 +43,11 @@ void pall(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	s = *stack;
-	while(s)
+
+	if (s == NULL)
+		return;
+
+	while(s->prev != *stack)
 	{
 		write_uint(s->n);
 		puts("");
@@ -61,8 +76,15 @@ void pop(stack_t **stack, unsigned int line_number)
 		return;
 	}
 	s = (*stack)->prev;
-	if (s != NULL)
-		s->next = NULL;
+	if (s != *stack)
+	{
+		s->next = (*stack)->next;
+		(*stack)->next->prev = s;
+	}
+	else
+	{
+		s = NULL;
+	}
 
 	free(*stack);
 	*stack = s;
@@ -98,4 +120,18 @@ void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
+}
+
+void stack(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	global_arginv->mode = STACK;
+}
+
+void queue(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	global_arginv->mode = QUEUE;
 }

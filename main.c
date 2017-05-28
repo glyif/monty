@@ -2,14 +2,16 @@
 
 void popall(stack_t **stack)
 {
-	stack_t *t;
+	stack_t *s, *t;
 
-	while ((*stack)!=NULL)
+	s = *stack;
+	while (s->prev != *stack)
 	{
-		t = *stack;
-		*stack = (*stack)->prev;
+		t = s;
+		s = s->prev;
 		free(t);
 	}
+	free(s);
 }
 
 int freeall()
@@ -33,6 +35,7 @@ void buildarginv(void)
 	global_arginv->buflimit = BUFSIZE;
 	global_arginv->exit = EXIT_SUCCESS;
 	global_arginv->stack = NULL;
+	global_arginv->mode = 0;
 }
 
 int main(int argc,char **argv)

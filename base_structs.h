@@ -45,6 +45,8 @@ typedef struct arg_inventory
 	int	   line_number;
 	stack_t *stack;
 
+	int mode; /* 0 for stack, 1 for queue */
+
 	int exit;
 } arg_inventory_t;
 

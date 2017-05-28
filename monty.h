@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include "base_structs.h"
 #define BUFSIZE 1024
+#define STACK 0
+#define QUEUE 1
 ssize_t _readline(int fd, char **buffer);
 int freeall();
 
@@ -27,5 +29,7 @@ void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int lin_number);
+void nop(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 #endif
