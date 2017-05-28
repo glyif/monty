@@ -8,7 +8,7 @@ CFILES=\
 	readline.c\
 	helper.c\
 	functions.c\
-	sub.c\
+	math_funcs.c\
 	rotate.c
 
 GLOBAL_HEADERS=\
