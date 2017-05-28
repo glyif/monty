@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * _atoi: string to int
+ * _atoi - string to int
  * @s: string to convert
  *
  * Return: integer converted from string
