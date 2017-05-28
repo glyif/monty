@@ -116,3 +116,17 @@ void nop(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	(void)line_number;
 }
+
+void stack(stack_t **stack, unsigned int line_number) 
+{
+	(void)stack;
+	(void)line_number;
+    global_arginv->mode = STACK;
+}
+
+void queue(stack_t **stack, unsigned int line_number) 
+{
+	(void)stack;
+	(void)line_number;
+    global_arginv->mode = QUEUE;
+}
