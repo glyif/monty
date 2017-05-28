@@ -18,35 +18,31 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	s->n = _atoi(global_arginv->argument);
 
-	if (*stack != NULL)
+	if(*stack!=NULL)
 	{
-		s->next = (*stack)->next;
-		(*stack)->next->prev = s;
-		s->prev = *stack;
+        s->next = (*stack)->next;
+        (*stack)->next->prev=s;
+        s->prev = * stack;
 		(*stack)->next = s;
 	}
-	else
-	{
-		s->next = s;
-		s->prev = s;
-		*stack = s;
-	}
-
-	if (global_arginv->mode == STACK)
-		*stack = s;
-
+    else
+    {
+        s->next=s;
+        s->prev=s;
+    	*stack = s;    	
+    }
+    if(global_arginv->mode == STACK)
+    	*stack = s;    	
 }
 
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number) 
 {
 	stack_t *s;
 
 	(void)line_number;
 	s = *stack;
-
-	if (s == NULL)
-		return;
-
+	if(s == NULL)
+	    return;
 	while(s->prev != *stack)
 	{
 		write_uint(s->n);
@@ -57,7 +53,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	puts("");
 }
 
-void pint(stack_t **stack, unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number) 
 {
 	if(*stack == NULL)
 	{
@@ -68,72 +64,55 @@ void pint(stack_t **stack, unsigned int line_number)
 	puts("");
 }
 
-void pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number) 
 {
 	stack_t *s;
 
 	if (*stack == NULL)
 	{
-		opcode_error("can't pop an empty stack",NULL,line_number);
+		opcode_error("can't pop an empty stack",NULL,line_number);  
 		return;
 	}
 	s = (*stack)->prev;
 	if (s != *stack)
 	{
 		s->next = (*stack)->next;
-		(*stack)->next->prev = s;
-	}
-	else
-	{
-		s = NULL;
-	}
-
+		(*stack)->next->prev=s;
+    }
+    else
+        s=NULL;
 	free(*stack);
 	*stack = s;
 }
 
-void swap(stack_t **stack, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_number) 
 {
 	int n;
 
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
-		opcode_error("can't swap, ","stack too short",line_number);
+		opcode_error("can't swap, ","stack too short",line_number);  
 		return;
 	}
-
+	
 	n = (*stack)->n;
 	(*stack)->n = (*stack)->prev->n;
 	(*stack)->prev->n = n;
 }
 
-void add(stack_t **stack, unsigned int line_number)
+void add(stack_t **stack, unsigned int line_number) 
 {
-	if (*stack == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->prev == *stack)
 	{
-		opcode_error("can't add, ","stack too short",line_number);
+		opcode_error("can't add, ","stack too short",line_number);  
 		return;
 	}
 	(*stack)->prev->n += (*stack)->n;
 	pop(stack,line_number);
 }
 
-void nop(stack_t **stack, unsigned int line_number)
+void nop(stack_t **stack, unsigned int line_number) 
 {
 	(void)stack;
 	(void)line_number;
-}
-
-void stack(stack_t **stack, unsigned int line_number)
-{
-	(void)stack;
-	(void)line_number;
-	global_arginv->mode = STACK;
-}
-
-void queue(stack_t **stack, unsigned int line_number)
-{
-	(void)stack;
-	(void)line_number;
-	global_arginv->mode = QUEUE;
 }
