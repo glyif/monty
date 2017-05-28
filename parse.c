@@ -86,6 +86,7 @@ void parse_line()
 			return;
 		}
 	}  
+	opcode_error("unknown instruction ", line, global_arginv->line_number);
 }
 
 void parse_monty() 

@@ -1,5 +1,15 @@
 #include "monty.h"
 
+void _puts(char *str)
+{
+	int i;
+
+	for (i = 0; str[i] != '\0'; i++)
+		;
+
+	write(1, str, i);
+}
+
 int _atoi(char *s)
 {
 	int result = 0, sign = 0, c;
@@ -45,12 +55,12 @@ int write_uint(unsigned int n)
 
 void opcode_error(char *msg1,char *msg2,int line_number)
 {
-	puts("L");
+	printf("L");
 	write_uint(line_number);
-	puts(": ");
-	puts(msg1);
+	printf(": ");
+	printf("%s", msg1);
 	if(msg2)
-		puts(msg2);
-	puts("\n");
-	global_arginv->exit=EXIT_FAILURE;
+		printf("%s", msg2);
+	printf("\n");
+	global_arginv->exit = EXIT_FAILURE;
 }
